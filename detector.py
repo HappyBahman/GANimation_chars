@@ -9,12 +9,12 @@ class Detector:
     """
     build and save detector model
     """
-    def __init__(self, image_size, conv_layers, kernel_sizes, pooling_sizes, drop_outs, dense_layer, batch_size=100):
+    def __init__(self, image_size, conv_layers, kernel_sizes, pooling_sizes, drop_outs, dense_layer):
         model = keras.models.Sequential()
         first_itr = True
         for layer, kernel, pool_size, drop_out in zip(conv_layers, kernel_sizes, pooling_sizes, drop_outs):
             if first_itr:
-                model.add(keras.layers.Conv2D(layer, kernel, input_shape=(28, 28, 1), padding='same'))
+                model.add(keras.layers.Conv2D(layer, kernel, input_shape=(image_size[0], image_size[1], 1), padding='same'))
                 model.add(keras.layers.BatchNormalization())
                 model.add(keras.layers.Activation('relu'))
                 model.add(keras.layers.MaxPool2D(pool_size=pool_size))
@@ -30,8 +30,8 @@ class Detector:
         model.add(keras.layers.Dense(dense_layer))
         model.add(keras.layers.Activation('relu'))
         model.add(keras.layers.Dropout(0.5))
-        model.add(keras.layers.Dense(2))
-        model.add(keras.layers.Activation('softmax'))
+        model.add(keras.layers.Dense(1))
+        model.add(keras.layers.Activation('sigmoid'))
         self.model = model
 
     def train(self, x_train, y_train, batch_size, epochs, x_test, y_test):

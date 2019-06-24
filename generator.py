@@ -9,7 +9,7 @@ class Generator:
     """
     build and save detector model
     """
-    def __init__(self, input_size, image_size, deconv_layers, kernel_sizes, pooling_sizes, drop_outs, batch_size=100):
+    def __init__(self, image_size, deconv_layers, kernel_sizes, pooling_sizes, drop_outs):
         image_resize = image_size
         for pool_size in pooling_sizes:
             image_resize //= pool_size

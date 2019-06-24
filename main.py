@@ -46,12 +46,12 @@ class GANimation:
         self.adv.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
     def plot_images(self, save2file=False, fake=True, samples=16, noise=None, step=0):
-        filename = 'content/gdrive/My Drive/ANN_models/GAN/mnist.png'
+        filename = 'content/drive/My Drive/ANN_models/GAN/mnist.png'
         if fake:
             if noise is None:
                 noise = np.random.uniform(-1.0, 1.0, size=[samples, 100])
             else:
-                filename = "content/gdrive/My Drive/ANN_models/GAN/mnist_%d.png" % step
+                filename = "content/drive/My Drive/ANN_models/GAN/mnist_%d.png" % step
             images = self.gen.model.predict(noise)
         else:
             i = np.random.randint(0, x_train.shape[0], samples)

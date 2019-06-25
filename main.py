@@ -23,8 +23,8 @@ GENERATOR_FILTERS = [5, 1]
 GENERATOR_STRIDES = [2, 2]
 GENERATOR_DROPOUTS = [0.5, 0.5]
 GENERATOR_DENSE = 5
-SAVE_INTERVAL = 5
-TRAIN_STEPS = 10
+SAVE_INTERVAL = 500
+TRAIN_STEPS = 5000
 
 
 class GANimation:
@@ -46,12 +46,12 @@ class GANimation:
         self.adv.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
     def plot_images(self, save2file=False, fake=True, samples=16, noise=None, step=0):
-        filename = 'mnist.png'
+        filename = 'content/drive/My Drive/ANN_models/GAN/mnist.png'
         if fake:
             if noise is None:
                 noise = np.random.uniform(-1.0, 1.0, size=[samples, 100])
             else:
-                filename = "mnist_%d.png" % step
+                filename = "content/drive/My Drive/ANN_models/GAN/mnist_%d.png" % step
             images = self.gen.model.predict(noise)
         else:
             i = np.random.randint(0, x_train.shape[0], samples)
